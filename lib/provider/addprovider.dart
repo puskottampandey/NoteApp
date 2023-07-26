@@ -2,8 +2,10 @@ import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 
 class AddProvider with ChangeNotifier {
-  final List<String> _addnote = [];
+  List<String> _addnote = [];
+
   List<String> get addnote => _addnote;
+
   void addNote(String value) {
     addnote.add(value);
     notifyListeners();
@@ -12,5 +14,21 @@ class AddProvider with ChangeNotifier {
   void removenote(String value) {
     addnote.remove(value);
     notifyListeners();
+  }
+
+  String _searchquery = "";
+  String get searchquery => _searchquery;
+
+  void setSearchquery(String query) {
+    _searchquery = query;
+    notifyListeners();
+  }
+
+  List<String> get filternote {
+    if (_searchquery.isEmpty) {
+      return _addnote;
+    } else {
+      return _addnote.where((note) => note.startsWith(_searchquery)).toList();
+    }
   }
 }

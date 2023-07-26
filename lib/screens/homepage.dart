@@ -1,5 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:noteapp/constant.dart';
+import 'package:noteapp/provider/addprovider.dart';
+import 'package:noteapp/screens/additeam.dart';
+import 'package:provider/provider.dart';
 
 class Homepage extends StatefulWidget {
   const Homepage({super.key});
@@ -11,6 +14,9 @@ class Homepage extends StatefulWidget {
 class _HomepageState extends State<Homepage> {
   @override
   Widget build(BuildContext context) {
+    final TextEditingController controller = TextEditingController();
+    List<String> addnote = [];
+
     return Scaffold(
       backgroundColor: backgroundcolor,
       body: Padding(
@@ -44,6 +50,7 @@ class _HomepageState extends State<Homepage> {
               height: 20,
             ),
             TextField(
+              controller: controller,
               decoration: InputDecoration(
                   border: OutlineInputBorder(
                       borderRadius: BorderRadius.circular(8)),
@@ -63,27 +70,31 @@ class _HomepageState extends State<Homepage> {
               height: 20,
             ),
             Expanded(
-              child: ListView.builder(
-                itemCount: 4,
-                itemBuilder: (context, index) {
-                  return Card(
-                    color: Colors.grey.shade800,
-                    child: const ListTile(
-                      leading: Text(
-                        "puskottam",
-                        style: TextStyle(color: Colors.white, fontSize: 20),
+                child: Consumer<AddProvider>(builder: (context, value, child) {
+              return ListView.builder(
+                  itemCount: value.addnote.length,
+                  itemBuilder: (context, index) {
+                    return Card(
+                      color: Colors.grey.shade800,
+                      child: ListTile(
+                        leading: Text(
+                          value.addnote[index].toString(),
+                          style: const TextStyle(
+                              color: Colors.white, fontSize: 20),
+                        ),
                       ),
-                    ),
-                  );
-                },
-              ),
-            )
+                    );
+                  });
+            }))
           ],
         ),
       ),
       floatingActionButton: FloatingActionButton(
         backgroundColor: Colors.grey.shade800,
-        onPressed: () {},
+        onPressed: () {
+          Navigator.push(context,
+              MaterialPageRoute(builder: ((context) => const AddIteam())));
+        },
         child: const Icon(
           Icons.add,
           color: Colors.grey,

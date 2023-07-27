@@ -75,9 +75,6 @@ class _HomepageState extends State<Homepage> {
                       borderRadius: BorderRadius.circular(30),
                     ),
                   ),
-                  onChanged: (value) {
-                    note.setSearchquery(value);
-                  },
                 );
               },
             ),
@@ -92,6 +89,7 @@ class _HomepageState extends State<Homepage> {
                     return Card(
                       color: Colors.grey.shade800,
                       child: ListTile(
+                        title: Text(DateTime.now().toString()),
                         trailing: IconButton(
                             onPressed: () {
                               value.removenote(value.addnote[index].toString());
@@ -100,6 +98,7 @@ class _HomepageState extends State<Homepage> {
                               Icons.delete,
                               color: Colors.white,
                             )),
+                        minLeadingWidth: 10,
                         leading: Text(
                           value.addnote[index].toString(),
                           style: const TextStyle(

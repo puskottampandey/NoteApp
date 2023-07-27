@@ -24,6 +24,7 @@ class AddProvider with ChangeNotifier {
     notifyListeners();
   }
 
+  List<String> flternote = [];
   List<String> get filternote {
     if (_searchquery.isEmpty) {
       return _addnote;

@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:flutter/src/widgets/framework.dart';
-import 'package:flutter/src/widgets/placeholder.dart';
+
 import 'package:noteapp/constant.dart';
 import 'package:provider/provider.dart';
 
@@ -46,6 +45,7 @@ class _SearchScreenState extends State<SearchScreen> {
                   ),
                   onChanged: (value) {
                     note.setSearchquery(value);
+                    note.filternote;
                   },
                 );
               },
@@ -56,7 +56,7 @@ class _SearchScreenState extends State<SearchScreen> {
             Expanded(
                 child: Consumer<AddProvider>(builder: (context, value, child) {
               return ListView.builder(
-                  itemCount: value.addnote.length,
+                  itemCount: value.filternote.length,
                   itemBuilder: (context, index) {
                     return Card(
                       color: Colors.grey.shade800,
@@ -70,7 +70,7 @@ class _SearchScreenState extends State<SearchScreen> {
                               color: Colors.white,
                             )),
                         leading: Text(
-                          value.addnote[index].toString(),
+                          value.filternote[index].toString(),
                           style: const TextStyle(
                               color: Colors.white, fontSize: 20),
                         ),

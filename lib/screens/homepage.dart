@@ -90,26 +90,88 @@ class _HomepageState extends State<Homepage> {
               return ListView.builder(
                   itemCount: value.addnote.length,
                   itemBuilder: (context, index) {
-                    return Card(
-                      color: Colors.grey.shade800,
-                      child: ListTile(
-                        title: Text(
-                          DateTime.now().toString(),
-                          style: const TextStyle(color: Colors.white),
+                    return Dismissible(
+                      background: Container(
+                        color: Colors.red,
+                        child: Padding(
+                          padding: const EdgeInsets.all(15),
+                          child: Row(
+                            mainAxisAlignment: MainAxisAlignment.end,
+                            children: const [
+                              Icon(Icons.delete, color: Colors.white),
+                              Text('Move to trash',
+                                  style: TextStyle(color: Colors.white)),
+                            ],
+                          ),
                         ),
-                        trailing: IconButton(
-                            onPressed: () {
-                              value.removenote(value.addnote[index].toString());
-                            },
-                            icon: const Icon(
-                              Icons.delete,
-                              color: Colors.white,
-                            )),
-                        minLeadingWidth: 10,
-                        leading: Text(
-                          value.addnote[index].toString(),
-                          style: const TextStyle(
-                              color: Colors.white, fontSize: 20),
+                      ),
+                      confirmDismiss: (DismissDirection direction) async {
+                        return await showDialog(
+                          context: context,
+                          builder: (BuildContext context) {
+                            return AlertDialog(
+                              backgroundColor: backgroundcolor,
+                              title: const Text(
+                                "Delete Confirmation",
+                                style: TextStyle(color: Colors.white),
+                              ),
+                              content: const Text(
+                                "Are you sure you want to delete this Note?",
+                                style: TextStyle(color: Colors.white),
+                              ),
+                              actions: <Widget>[
+                                ElevatedButton(
+                                    onPressed: () {
+                                      value.removenote(
+                                          value.addnote[index].toString());
+                                      Navigator.of(context).pop(true);
+                                    },
+                                    child: const Text(
+                                      "Delete",
+                                      style: TextStyle(color: Colors.red),
+                                    )),
+                                ElevatedButton(
+                                  onPressed: () =>
+                                      Navigator.of(context).pop(false),
+                                  child: const Text("Cancel"),
+                                ),
+                              ],
+                            );
+                          },
+                        );
+                      },
+                      onDismissed: (DismissDirection direction) {
+                        if (direction == DismissDirection.down) {
+                          value.removenote(value.addnote[index].toString());
+                        } else {
+                          null;
+                        }
+                      },
+                      key: Key(value.addnote[index]),
+                      child: Card(
+                        color: Colors.grey.shade800,
+                        child: ListTile(
+                          title: Text(
+                            DateTime.now().toString(),
+                            style: const TextStyle(color: Colors.white),
+                          ),
+                          /*
+                          trailing: IconButton(
+                              onPressed: () {
+                                value.removenote(
+                                    value.addnote[index].toString());
+                              },
+                              icon: const Icon(
+                                Icons.delete,
+                                color: Colors.white,
+                              )),
+                              */
+                          minLeadingWidth: 10,
+                          leading: Text(
+                            value.addnote[index].toString(),
+                            style: const TextStyle(
+                                color: Colors.white, fontSize: 20),
+                          ),
                         ),
                       ),
                     );

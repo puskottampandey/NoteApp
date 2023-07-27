@@ -33,16 +33,20 @@ class _HomepageState extends State<Homepage> {
                       fontSize: 30,
                       fontWeight: FontWeight.bold),
                 ),
-                Container(
-                  height: 40,
-                  width: 40,
-                  decoration: BoxDecoration(
-                      color: Colors.grey.shade800,
-                      borderRadius: BorderRadiusDirectional.circular(10)),
-                  child: const Icon(
-                    Icons.sort,
-                    color: Colors.white,
-                  ),
+                Consumer<AddProvider>(
+                  builder: (context, sort, child) {
+                    return Container(
+                        height: 40,
+                        width: 40,
+                        decoration: BoxDecoration(
+                            color: Colors.grey.shade800,
+                            borderRadius: BorderRadiusDirectional.circular(10)),
+                        child: IconButton(
+                            onPressed: () {
+                              sort.sort();
+                            },
+                            icon: const Icon(Icons.sort)));
+                  },
                 )
               ],
             ),
@@ -89,7 +93,10 @@ class _HomepageState extends State<Homepage> {
                     return Card(
                       color: Colors.grey.shade800,
                       child: ListTile(
-                        title: Text(DateTime.now().toString()),
+                        title: Text(
+                          DateTime.now().toString(),
+                          style: const TextStyle(color: Colors.white),
+                        ),
                         trailing: IconButton(
                             onPressed: () {
                               value.removenote(value.addnote[index].toString());

@@ -7,7 +7,7 @@ class AddProvider with ChangeNotifier {
   List<String> get addnote => _addnote;
 
   void addNote(String value) {
-    addnote.add(value);
+    addnote.addAll([value]);
     notifyListeners();
   }
 
@@ -29,7 +29,14 @@ class AddProvider with ChangeNotifier {
     if (_searchquery.isEmpty) {
       return _addnote;
     } else {
-      return _addnote.where((note) => note.startsWith(_searchquery)).toList();
+      return _addnote
+          .where((note) => note.startsWith(_searchquery.toLowerCase()))
+          .toList();
     }
+  }
+
+  void sort() {
+    _addnote.sort(((a, b) => a.length.compareTo(b.length)));
+    notifyListeners();
   }
 }

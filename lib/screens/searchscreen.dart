@@ -63,7 +63,8 @@ class _SearchScreenState extends State<SearchScreen> {
                       child: ListTile(
                         trailing: IconButton(
                             onPressed: () {
-                              value.removenote(value.addnote[index].toString());
+                              value.removenote(
+                                  value.filternote[index].toString());
                             },
                             icon: const Icon(
                               Icons.delete,

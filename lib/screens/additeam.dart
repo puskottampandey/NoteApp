@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
 
-import 'package:noteapp/constant.dart';
 import 'package:provider/provider.dart';
 
 import '../provider/addprovider.dart';
+import 'constant.dart';
 
 class AddIteam extends StatefulWidget {
   const AddIteam({super.key});
@@ -18,7 +18,7 @@ class _AddIteamState extends State<AddIteam> {
     final TextEditingController controller = TextEditingController();
 
     return Scaffold(
-      backgroundColor: backgroundcolor,
+      backgroundColor: backgroundColor,
       body: Padding(
         padding: const EdgeInsets.fromLTRB(30, 100, 20, 10),
         child: Column(

@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:noteapp/screens/constant.dart';
 
-import 'package:noteapp/constant.dart';
 import 'package:provider/provider.dart';
 
 import '../provider/addprovider.dart';
@@ -18,7 +18,7 @@ class _SearchScreenState extends State<SearchScreen> {
     final TextEditingController controller = TextEditingController();
 
     return Scaffold(
-      backgroundColor: backgroundcolor,
+      backgroundColor: backgroundColor,
       body: Padding(
         padding: const EdgeInsets.fromLTRB(20, 100, 20, 10),
         child: Column(

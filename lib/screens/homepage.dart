@@ -1,7 +1,8 @@
 import 'package:flutter/material.dart';
-import 'package:noteapp/constant.dart';
+
 import 'package:noteapp/provider/addprovider.dart';
 import 'package:noteapp/screens/additeam.dart';
+import 'package:noteapp/screens/constant.dart';
 import 'package:noteapp/screens/searchscreen.dart';
 import 'package:provider/provider.dart';
 
@@ -18,7 +19,7 @@ class _HomepageState extends State<Homepage> {
     final TextEditingController controller = TextEditingController();
 
     return Scaffold(
-      backgroundColor: backgroundcolor,
+      backgroundColor: backgroundColor,
       body: Padding(
         padding: const EdgeInsets.fromLTRB(20, 100, 20, 10),
         child: Column(
@@ -93,11 +94,11 @@ class _HomepageState extends State<Homepage> {
                     return Dismissible(
                       background: Container(
                         color: Colors.red,
-                        child: Padding(
-                          padding: const EdgeInsets.all(15),
+                        child: const Padding(
+                          padding: EdgeInsets.all(15),
                           child: Row(
                             mainAxisAlignment: MainAxisAlignment.end,
-                            children: const [
+                            children: [
                               Icon(Icons.delete, color: Colors.white),
                               Text('Move to trash',
                                   style: TextStyle(color: Colors.white)),
@@ -110,7 +111,7 @@ class _HomepageState extends State<Homepage> {
                           context: context,
                           builder: (BuildContext context) {
                             return AlertDialog(
-                              backgroundColor: backgroundcolor,
+                              backgroundColor: backgroundColor,
                               title: const Text(
                                 "Delete Confirmation",
                                 style: TextStyle(color: Colors.white),
@@ -151,7 +152,7 @@ class _HomepageState extends State<Homepage> {
                       child: Card(
                         color: Colors.grey.shade800,
                         child: ListTile(
-                          title: Text(
+                          subtitle: Text(
                             DateTime.now().toString(),
                             style: const TextStyle(color: Colors.white),
                           ),
@@ -166,11 +167,13 @@ class _HomepageState extends State<Homepage> {
                                 color: Colors.white,
                               )),
                               */
-                          minLeadingWidth: 10,
-                          leading: Text(
-                            value.addnote[index].toString(),
-                            style: const TextStyle(
-                                color: Colors.white, fontSize: 20),
+
+                          title: SizedBox(
+                            child: Text(
+                              value.addnote[index].toString(),
+                              style: const TextStyle(
+                                  color: Colors.white, fontSize: 20),
+                            ),
                           ),
                         ),
                       ),

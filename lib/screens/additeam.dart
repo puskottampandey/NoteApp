@@ -24,6 +24,8 @@ class _AddIteamState extends State<AddIteam> {
         child: Column(
           children: [
             TextField(
+              keyboardType: TextInputType.multiline,
+              maxLines: null,
               controller: controller,
               style: const TextStyle(color: Colors.white),
               cursorColor: Colors.white,
